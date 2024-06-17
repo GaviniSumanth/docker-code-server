@@ -22,6 +22,21 @@ RUN \
     net-tools \
     netcat \
     sudo && \
+  echo "**** install additional packages ****" && \
+  apt-get install -y \
+    python3 \
+    python3-pip \
+    python3-venv \
+    build-essential \
+    openjdk-21-jdk \
+    coreutils \
+    rename \
+    curl \
+    wget \
+    tree && \
+  echo "**** install nvm ****" && \
+  nvm_version=$(basename $(curl -fs -o /dev/null -w %{redirect_url} "https://github.com/nvm-sh/nvm/releases/latest")) && \
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$nvm_version/install.sh | bash && \
   echo "**** install code-server ****" && \
   if [ -z ${CODE_RELEASE+x} ]; then \
     CODE_RELEASE=$(curl -sX GET https://api.github.com/repos/coder/code-server/releases/latest \
