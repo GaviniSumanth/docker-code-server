@@ -29,3 +29,8 @@ chmod 700 /config/.ssh
 if [ -n "$(ls -A /config/.ssh)" ]; then
     chmod 600 /config/.ssh/*
 fi
+
+echo "Adding nvm to .bashrc"
+echo "export NVM_DIR=\"/opt/.nvm\"" >> /config/.bashrc
+echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"" >> /config/.bashrc
+echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"" >> /config/.bashrc

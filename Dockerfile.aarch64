@@ -36,7 +36,7 @@ RUN \
     tree && \
   echo "**** install nvm ****" && \
   nvm_version=$(basename $(curl -fs -o /dev/null -w %{redirect_url} "https://github.com/nvm-sh/nvm/releases/latest")) && \
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$nvm_version/install.sh | bash && \
+  export HOME=/opt && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$nvm_version/install.sh | bash && \
   echo "**** install code-server ****" && \
   if [ -z ${CODE_RELEASE+x} ]; then \
     CODE_RELEASE=$(curl -sX GET https://api.github.com/repos/coder/code-server/releases/latest \
