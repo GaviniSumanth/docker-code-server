@@ -35,8 +35,13 @@ chown abc:abc -R /opt/.nvm
 
 # link nvm versions
 mkdir -p /config/.nvm/versions/
+mkdir -p /config/.nvm/alias/
+
 ln -s /config/.nvm/versions /opt/.nvm/
+ln -s /config/.nvm/alias /opt/.nvm/
+
 chown -R abc:abc /config/.nvm/versions
+chown -R abc:abc /config/.nvm/alias
 
 # copy extensions to /config/extensions if it doesn't exist
 if [ ! -d /config/extensions ]; then
