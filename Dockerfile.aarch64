@@ -56,6 +56,27 @@ RUN \
     /var/lib/apt/lists/* \
     /var/tmp/*
 
+# add nvm to path
+RUN echo "export NVM_DIR=\"/opt/.nvm\"" >> /root/.bashrc && \
+  echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"" >> /root/.bashrc && \
+  echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"" >> /root/.bashrc
+
+# install code-server extensions
+RUN \
+  echo "**** install code-server extensions ****" && \
+  /app/code-server/bin/code-server --install-extension ms-python.python && \
+  /app/code-server/bin/code-server --install-extension ms-python.black-formatter && \
+  /app/code-server/bin/code-server --install-extension ms-toolsai.jupyter && \
+  /app/code-server/bin/code-server --install-extension llvm-vs-code-extensions.vscode-clangd && \
+  /app/code-server/bin/code-server --install-extension redhat.java && \
+  /app/code-server/bin/code-server --install-extension esbenp.prettier-vscode && \
+  /app/code-server/bin/code-server --install-extension Gruntfuggly.todo-tree && \
+  /app/code-server/bin/code-server --install-extension mhutchie.git-graph && \
+  /app/code-server/bin/code-server --install-extension waderyan.gitblame && \
+  /app/code-server/bin/code-server --install-extension donjayamanne.githistory
+
+RUN mv ~/.local/share/code-server/extensions /opt/extensions
+
 # add local files
 COPY /root /
 

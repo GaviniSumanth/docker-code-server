@@ -33,7 +33,12 @@ fi
 # fix permissions for nvm
 chown abc:abc -R /opt/.nvm
 
-echo "Adding nvm to .bashrc"
-echo "export NVM_DIR=\"/opt/.nvm\"" >> /config/.bashrc
-echo "[ -s \"\$NVM_DIR/nvm.sh\" ] && \. \"\$NVM_DIR/nvm.sh\"" >> /config/.bashrc
-echo "[ -s \"\$NVM_DIR/bash_completion\" ] && \. \"\$NVM_DIR/bash_completion\"" >> /config/.bashrc
+# link nvm versions
+mkdir /config/.nvm/
+ln -s /opt/.nvm/versions /config/.nvm/
+
+# copy extensions to /config/extensions if it doesn't exist
+if [ ! -d /config/extensions ]; then
+    cp -r /opt/extensions /config/
+    chown -R abc:abc /config/extensions
+fi
